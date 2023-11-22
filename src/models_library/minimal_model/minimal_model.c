@@ -39,8 +39,8 @@ SET_ODE_INITIAL_CONDITIONS_CPU(set_model_initial_conditions_cpu) {
     OMP(parallel for)
         for(uint32_t i = 0; i < num_cells; i++) {
             real *sv = &solver->sv[i * NEQ];
-            sv[0] = 0.0f; //u
-            sv[1] = 1.0f; //v
+            sv[0] = 1.0f; //v
+            sv[1] = 0.0f; //u
             sv[2] = 1.0f; //w
             sv[3] = 0.0f; //s
         }
@@ -103,7 +103,7 @@ void solve_model_ode_cpu(real dt, real *sv, real stim_current, int type_cell)  {
 
     RHS_cpu(rY, rDY, stim_current, dt, type_cell);
 
-    //THIS MODEL USES THE Rush Larsen Method TO SOLVE THE EDOS
+    //Euler
     sv[0] = dt*rDY[0] + rY[0];
     sv[1] = dt*rDY[1] + rY[1];
     sv[2] = dt*rDY[2] + rY[2];
@@ -113,14 +113,13 @@ void solve_model_ode_cpu(real dt, real *sv, real stim_current, int type_cell)  {
 // lado direito
 void RHS_cpu(const real *sv, real *rDY_, real stim_current, real dt, int type_cell) {
 
-    //THIS IS THE STATE VECTOR THAT WE NEED TO SAVE IN THE STEADY STATE
-    const real s_u = sv[0];
-    const real s_v = sv[1];
-    const real s_w = sv[2];
-    const real s_s = sv[3];
+    //State variables
+    const real v = sv[0];
+    const real u = sv[1];
+    const real w = sv[2];
+    const real s = sv[3];
 
-    //////////////////////////////////////////
-
+    // Constants
     const real u_o = 0.0;
     const real theta_v = 0.3;
     const real theta_w = 0.13;
@@ -220,32 +219,27 @@ void RHS_cpu(const real *sv, real *rDY_, real stim_current, real dt, int type_ce
       const real w_infstar = 0.94;
     }
 
-        ustep = u;
-        vstep = v;
-        wstep = w;
-        sstep = s;
-
         // Get du_dt, dv_dt, dw_dt and ds_dt
         //du_dt = - reaction_u(ustep, vstep, wstep, sstep) + I_stim;
         //
-        const real H = 0.0;
-        const real h_o = 0.0;
-        const real h_w = 0.0;
-        const real h_v_minus = 0.0;
-        const real tau_vminus = 0.0;
-        const real J_fi = 0.0;
-        const real J_so = 0.0;
-        const real J_si = 0.0;
-        const real tau_o = 0.0;
-        const real tau_so = 0.0;
-        const real tau_s = 0.0;
-        const real du_dt = 0.0;
-        const real dv_dt = 0.0;
-        const real dw_dt = 0.0;
-        const real ds_dt = 0.0;
-        const real v_inf = 0.0;
-        const real w_inf = 0.0;
-        const real tau_wminus = 0.0;
+        real H = 0.0;
+        real h_o = 0.0;
+        real h_w = 0.0;
+        real h_v_minus = 0.0;
+        real tau_vminus = 0.0;
+        real J_fi = 0.0;
+        real J_so = 0.0;
+        real J_si = 0.0;
+        real tau_o = 0.0;
+        real tau_so = 0.0;
+        real tau_s = 0.0;
+        // real du_dt = 0.0;
+        // real dv_dt = 0.0;
+        // real dw_dt = 0.0;
+        // real ds_dt = 0.0;
+        real v_inf = 0.0;
+        real w_inf = 0.0;
+        real tau_wminus = 0.0;
 
         if (u-theta_v > 0)
           H = 1.0;
@@ -258,7 +252,7 @@ void RHS_cpu(const real *sv, real *rDY_, real stim_current, real dt, int type_ce
         tau_so = tau_so1 + (((tau_so2 - tau_so1) * (1.0 + tanh(k_so*(u - u_so)))) * 0.5);
         J_so = ((u-u_o) * (1.0 - h_w) / tau_o) + (h_w / tau_so);
         J_si = - h_w * w * s / tau_si;
-        du_dt = - (J_fi + J_so + J_si) + I_stim;
+        rDY_[1] = - (J_fi + J_so + J_si) + I_stim;
         //
 
         //dv_dt = dvdt(ustep, vstep);
@@ -270,27 +264,19 @@ void RHS_cpu(const real *sv, real *rDY_, real stim_current, real dt, int type_ce
         if (u-theta_vminus > 0)
           h_v_minus = 1.0;
         tau_vminus = (1.0 - h_v_minus) * tau_v1minus + (h_v_minus * tau_v2minus);
-        dv_dt = (1.0 - H) * (v_inf - v) / tau_vminus - (H * v / tau_vplus);
+        rDY_[0] = (1.0 - H) * (v_inf - v) / tau_vminus - (H * v / tau_vplus);
         //
 
         //dw_dt = dwdt(ustep, wstep);
         //
         w_inf = (1.0 - h_o) * (1.0 - (u/tau_winf)) + (h_o * w_infstar);
         tau_wminus = tau_w1minus + (((tau_w2minus - tau_w1minus) * (1.0 + tanh(k_wminus*(u - u_wminus)))) * 0.5);
-        dw_dt = (1.0 - h_w) * (w_inf - w) / tau_wminus - (h_w * w / tau_wplus)
+        rDY_[2] = (1.0 - h_w) * (w_inf - w) / tau_wminus - (h_w * w / tau_wplus)
         //
 
         //ds_dt = dsdt(ustep, sstep);
         //
         tau_s = (1.0 - h_w) * tau_s1 + (h_w * tau_s2);
-        ds_dt = (((1.0 + tanh(k_s*(u - u_s))) * 0.5) - s) / tau_s;
+        rDY_[3] = (((1.0 + tanh(k_s*(u - u_s))) * 0.5) - s) / tau_s;
         //
-
-        // Update u, v, w and s
-        u = ustep + dt * du_dt;
-        v = vstep + dt * dv_dt;
-        w = wstep + dt * dw_dt;
-        s = sstep + dt * ds_dt;
-
-    //////////////////////////////////////////
 }
