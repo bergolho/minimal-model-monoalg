@@ -5,7 +5,7 @@
 #include "../../extra_data_library/helper_functions.h"
 
 #define NEQ 4
-#define INITIAL_V (-86.2f)
+#define INITIAL_V (0.0f)
 
 #ifdef __CUDACC__
 
