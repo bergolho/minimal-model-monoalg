@@ -1,0 +1,19 @@
+// GPU
+Saving state with time = 1000.080000, and count = 25002
+Resolution Time: 80992596 μs (1.349877 min)
+Total Write Time: 42833394 μs (0.713890 min)
+ODE Total Time: 18370926 μs (0.306182 min)
+CG Total Time: 16787978 μs (0.279800 min)
+Refine time: 0 μs (0.000000 min)
+Derefine time: 0 μs (0.000000 min)
+CG Total Iterations: 169360
+
+// CPU
+Saving state with time = 1000.080000, and count = 25002
+Resolution Time: 104181660 μs (1.736361 min)
+Total Write Time: 42218842 μs (0.703647 min)
+ODE Total Time: 41537858 μs (0.692298 min)
+CG Total Time: 17697936 μs (0.294966 min)
+Refine time: 0 μs (0.000000 min)
+Derefine time: 0 μs (0.000000 min)
+CG Total Iterations: 169360

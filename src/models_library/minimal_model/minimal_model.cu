@@ -9,7 +9,7 @@
 
 extern "C" SET_ODE_INITIAL_CONDITIONS_GPU(set_model_initial_conditions_gpu) {
 
-    log_info("Using Minimal Model GPU\n");
+    log_info("Using Minimal Model Mixed GPU\n");
 
     uint32_t num_volumes = solver->original_num_cells;
 
@@ -39,6 +39,7 @@ extern "C" SOLVE_MODEL_ODES(solve_model_odes_gpu) {
     // execution configuration
     const int GRID  = ((int)num_cells_to_solve + BLOCK_SIZE - 1)/BLOCK_SIZE;
 
+
     size_t stim_currents_size = sizeof(real)*num_cells_to_solve;
     size_t cells_to_solve_size = sizeof(uint32_t)*num_cells_to_solve;
 
@@ -46,20 +47,22 @@ extern "C" SOLVE_MODEL_ODES(solve_model_odes_gpu) {
     check_cuda_error(cudaMalloc((void **) &stims_currents_device, stim_currents_size));
     check_cuda_error(cudaMemcpy(stims_currents_device, stim_currents, stim_currents_size, cudaMemcpyHostToDevice));
 
+
+
     uint32_t *cells_to_solve_device = NULL;
     if(cells_to_solve != NULL) {
         check_cuda_error(cudaMalloc((void **) &cells_to_solve_device, cells_to_solve_size));
         check_cuda_error(cudaMemcpy(cells_to_solve_device, cells_to_solve, cells_to_solve_size, cudaMemcpyHostToDevice));
     }
 
-    real *fibrosis_device;
-    real *fibs = NULL;
-    real fibs_size = num_cells_to_solve*sizeof(real);
+    // real *fibrosis_device;
+    // real *fibs = NULL;
+    // real fibs_size = num_cells_to_solve*sizeof(real);
 
-    bool deallocate = true;
+    // bool deallocate = true;
 
-    check_cuda_error(cudaMalloc((void **) NULL, fibs_size));
-    check_cuda_error(cudaMemcpy(fibrosis_device, fibs, fibs_size, cudaMemcpyHostToDevice));
+    // check_cuda_error(cudaMalloc((void **) NULL, fibs_size));
+    // check_cuda_error(cudaMemcpy(fibrosis_device, fibs, fibs_size, cudaMemcpyHostToDevice));
 
     uint32_t *mapping = NULL;
     uint32_t *mapping_device = NULL;
@@ -74,18 +77,18 @@ extern "C" SOLVE_MODEL_ODES(solve_model_odes_gpu) {
         log_error_and_exit("You need to specify a mask function when using a mixed model!\n");
     }
 
-    solve_gpu<<<GRID, BLOCK_SIZE>>>(dt, sv, stims_currents_device, cells_to_solve_device, num_cells_to_solve, num_steps, NULL, mapping_device);
+    solve_gpu<<<GRID, BLOCK_SIZE>>>(dt, sv, stims_currents_device, cells_to_solve_device, num_cells_to_solve, num_steps, mapping_device);
 
     check_cuda_error( cudaPeekAtLastError() );
 
     check_cuda_error(cudaFree(stims_currents_device));
-    check_cuda_error(cudaFree(NULL));
+    // check_cuda_error(cudaFree(NULL));
     // check_cuda_error(cudaFree(extra_parameters_device));
 
     if(cells_to_solve_device) check_cuda_error(cudaFree(cells_to_solve_device));
     if(mapping_device) check_cuda_error(cudaFree(mapping_device));
 
-    if(deallocate) free(fibs);
+    // if(deallocate) free(fibs);
 }
 
 __global__ void kernel_set_model_inital_conditions(real *sv, real*IC, int num_volumes)
@@ -105,7 +108,7 @@ __global__ void kernel_set_model_inital_conditions(real *sv, real*IC, int num_vo
 // Solving the model for each cell in the tissue matrix ni x nj
 __global__ void solve_gpu(real dt, real *sv, real* stim_currents,
                           uint32_t *cells_to_solve, uint32_t num_cells_to_solve,
-                          int num_steps, real *fibrosis, uint32_t *mapping)
+                          int num_steps, uint32_t *mapping)
 {
     int threadID = blockDim.x * blockIdx.x + threadIdx.x;
     int sv_id;
@@ -122,19 +125,22 @@ __global__ void solve_gpu(real dt, real *sv, real* stim_currents,
         for (int n = 0; n < num_steps; ++n) {
 
             if (mapping[sv_id] == 0) {
-                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, NULL, 0);
+                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, 0);
             }
             else if(mapping[sv_id] == 1){
-                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, NULL, 1);
+                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, 1);
             }
             else {
-                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, NULL, 2);
+                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, 2);
             }
 
             *((real*)((char*)sv) + sv_id) = dt*rDY[0] + *((real*)((char*)sv) + sv_id);
+            // *((real*)((char*)sv) + sv_id) = dt*rDY[1] + *((real*)((char*)sv) + sv_id);
+            // *((real*)((char*)sv) + sv_id) = dt*rDY[2] + *((real*)((char*)sv) + sv_id);
+            // *((real*)((char*)sv) + sv_id) = dt*rDY[3] + *((real*)((char*)sv) + sv_id);
 
-            for(int i = 0; i < NEQ; i++) {
-                *((real*)((char*)sv + pitch * i) + sv_id) = rDY[i];
+            for(int i = 1; i < NEQ; i++) {
+                *((real*)((char*)sv + pitch * i) + sv_id) = dt*rDY[i] + *((real*)((char*)sv + pitch * i) + sv_id);
             }
 
         }
@@ -143,9 +149,8 @@ __global__ void solve_gpu(real dt, real *sv, real* stim_currents,
 }
 
 
-inline __device__ void RHS_gpu(real *sv_, real *rDY_, real stim_current, int threadID_, real dt, real fibrosis, int type_cell) {
+inline __device__ void RHS_gpu(real *sv_, real *rDY_, real stim_current, int threadID_, real dt, int type_cell) {
 
-    //fibrosis = 0 means that the cell is fibrotic, 1 is not fibrotic. Anything between 0 and 1 means border zone
     const real u   = *((real*)((char*)sv_ + pitch * 0) + threadID_);
     const real v   = *((real*)((char*)sv_ + pitch * 1) + threadID_);
     const real w   = *((real*)((char*)sv_ + pitch * 2) + threadID_);
