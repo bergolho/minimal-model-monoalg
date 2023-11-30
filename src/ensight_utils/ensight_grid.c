@@ -134,7 +134,7 @@ void save_en6_result_file(char *filename, struct grid *the_grid, bool binary) {
         new_line(result_file, binary);
 
         for(int i = 0 ; i < the_grid->num_active_cells; i++) {
-            float v = (float) the_grid->active_cells[i]->v;
+            float v = (float) ((the_grid->active_cells[i]->v) * 85.7 - 84.0);
             write_float(v, result_file, binary);
             new_line(result_file, binary);
 
