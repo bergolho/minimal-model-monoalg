@@ -439,4 +439,454 @@
 "command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  src/main_simulator.c /home/user/monoalg/MonoAlg3D_C/build_release/libmonodomain/libmonodomain.a /home/user/monoalg/MonoAlg3D_C/build_release/libode_solver/libode_solver.a /home/user/monoalg/MonoAlg3D_C/build_release/libini_parser/libini_parser.a /home/user/monoalg/MonoAlg3D_C/build_release/libconfig/libconfig.a /home/user/monoalg/MonoAlg3D_C/build_release/libtinyexpr/libtinyexpr.a /home/user/monoalg/MonoAlg3D_C/build_release/libgui/libgui.a /home/user/monoalg/MonoAlg3D_C/src/3dparty/raylib/libraylib.a /home/user/monoalg/MonoAlg3D_C/build_release/libtinyfiledialogs/libtinyfiledialogs.a /home/user/monoalg/MonoAlg3D_C/build_release/libconfig_helpers/libconfig_helpers.a /home/user/monoalg/MonoAlg3D_C/build_release/libensight_utils/libensight_utils.a /home/user/monoalg/MonoAlg3D_C/build_release/libvtk_utils/libvtk_utils.a /home/user/monoalg/MonoAlg3D_C/build_release/libyxml/libyxml.a /home/user/monoalg/MonoAlg3D_C/build_release/libalg/libalg.a /home/user/monoalg/MonoAlg3D_C/build_release/libgraph/libgraph.a /home/user/monoalg/MonoAlg3D_C/build_release/libutils/libutils.a /home/user/monoalg/MonoAlg3D_C/build_release/libsds/libsds.a /home/user/monoalg/MonoAlg3D_C/build_release/libminiz/libminiz.a  -o /home/user/monoalg/MonoAlg3D_C/bin/MonoAlg3D -L/usr/local/cuda/lib64/ -L/home/user/monoalg/MonoAlg3D_C/shared_libs -ldl -lm -lgpu_utils -lcudart -lOpenGL -lGLX -lGLU -lpthread -lX11 -lrt -llogger -Wl,-rpath=/home/user/monoalg/MonoAlg3D_C/shared_libs", 
 "file": "main_simulator.c" 
 },
+{
+"directory": "/home/user/minimal-model-monoalg/src/ensight_utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/ensight_utils/ensight_grid.c -o /home/user/minimal-model-monoalg/build_release/libensight_utils/objs/ensight_grid.c.o", 
+"file": "ensight_grid.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ToROrd", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ToROrd/ToRORd_dynCl_mixed_endo_mid_epi.c -o /home/user/minimal-model-monoalg/build_release/libToRORd_dynCl_mixed_endo_mid_epi/objs/ToRORd_dynCl_mixed_endo_mid_epi.c.o", 
+"file": "ToRORd_dynCl_mixed_endo_mid_epi.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/torord_extra", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/torord_extra/torord_extra.c -o /home/user/minimal-model-monoalg/build_release/libtorord_extra/objs/torord_extra.c.o", 
+"file": "torord_extra.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  src/main_simulator.c /home/user/minimal-model-monoalg/build_release/libmonodomain/libmonodomain.a /home/user/minimal-model-monoalg/build_release/libode_solver/libode_solver.a /home/user/minimal-model-monoalg/build_release/libini_parser/libini_parser.a /home/user/minimal-model-monoalg/build_release/libconfig/libconfig.a /home/user/minimal-model-monoalg/build_release/libtinyexpr/libtinyexpr.a /home/user/minimal-model-monoalg/build_release/libgui/libgui.a /home/user/minimal-model-monoalg/src/3dparty/raylib/libraylib.a /home/user/minimal-model-monoalg/build_release/libtinyfiledialogs/libtinyfiledialogs.a /home/user/minimal-model-monoalg/build_release/libconfig_helpers/libconfig_helpers.a /home/user/minimal-model-monoalg/build_release/libensight_utils/libensight_utils.a /home/user/minimal-model-monoalg/build_release/libvtk_utils/libvtk_utils.a /home/user/minimal-model-monoalg/build_release/libyxml/libyxml.a /home/user/minimal-model-monoalg/build_release/libalg/libalg.a /home/user/minimal-model-monoalg/build_release/libgraph/libgraph.a /home/user/minimal-model-monoalg/build_release/libutils/libutils.a /home/user/minimal-model-monoalg/build_release/libsds/libsds.a /home/user/minimal-model-monoalg/build_release/libminiz/libminiz.a  -o /home/user/minimal-model-monoalg/bin/MonoAlg3D -L/usr/local/cuda/lib64/ -L/home/user/minimal-model-monoalg/shared_libs -ldl -lm -lgpu_utils -lcudart -lOpenGL -lGLX -lGLU -lpthread -lX11 -lrt -llogger -Wl,-rpath=/home/user/minimal-model-monoalg/shared_libs", 
+"file": "main_simulator.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/3dparty/sds", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/3dparty/sds/sds.c -o /home/user/minimal-model-monoalg/build_release/libsds/objs/sds.c.o", 
+"file": "sds.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/config_helpers", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/config_helpers/config_helpers.c -o /home/user/minimal-model-monoalg/build_release/libconfig_helpers/objs/config_helpers.c.o", 
+"file": "config_helpers.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/utils/search.c -o /home/user/minimal-model-monoalg/build_release/libutils/objs/search.c.o", 
+"file": "search.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/utils/stop_watch.c -o /home/user/minimal-model-monoalg/build_release/libutils/objs/stop_watch.c.o", 
+"file": "stop_watch.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/utils/sort.c -o /home/user/minimal-model-monoalg/build_release/libutils/objs/sort.c.o", 
+"file": "sort.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/utils/file_utils.c -o /home/user/minimal-model-monoalg/build_release/libutils/objs/file_utils.c.o", 
+"file": "file_utils.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/utils/batch_utils.c -o /home/user/minimal-model-monoalg/build_release/libutils/objs/batch_utils.c.o", 
+"file": "batch_utils.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/alg/grid", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/alg/grid/grid.c -o /home/user/minimal-model-monoalg/build_release/libalg/objs/grid.c.o", 
+"file": "grid.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/alg/grid", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/alg/grid/grid_refinement.c -o /home/user/minimal-model-monoalg/build_release/libalg/objs/grid_refinement.c.o", 
+"file": "grid_refinement.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/alg/grid", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/alg/grid/grid_derefinement.c -o /home/user/minimal-model-monoalg/build_release/libalg/objs/grid_derefinement.c.o", 
+"file": "grid_derefinement.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/alg/cell", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/alg/cell/cell.c -o /home/user/minimal-model-monoalg/build_release/libalg/objs/cell.c.o", 
+"file": "cell.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/alg/cell", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/alg/cell/cell_derefinement.c -o /home/user/minimal-model-monoalg/build_release/libalg/objs/cell_derefinement.c.o", 
+"file": "cell_derefinement.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/alg/cell", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/alg/cell/cell_refinement.c -o /home/user/minimal-model-monoalg/build_release/libalg/objs/cell_refinement.c.o", 
+"file": "cell_refinement.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/alg/grid_purkinje", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/alg/grid_purkinje/grid_purkinje.c -o /home/user/minimal-model-monoalg/build_release/libalg/objs/grid_purkinje.c.o", 
+"file": "grid_purkinje.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/monodomain", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/monodomain/monodomain_solver.c -o /home/user/minimal-model-monoalg/build_release/libmonodomain/objs/monodomain_solver.c.o", 
+"file": "monodomain_solver.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/ode_solver", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/ode_solver/ode_solver.c -o /home/user/minimal-model-monoalg/build_release/libode_solver/objs/ode_solver.c.o", 
+"file": "ode_solver.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/3dparty/ini_parser", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/3dparty/ini_parser/ini.c -o /home/user/minimal-model-monoalg/build_release/libini_parser/objs/ini.c.o", 
+"file": "ini.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/config", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/config/config_common.c -o /home/user/minimal-model-monoalg/build_release/libconfig/objs/config_common.c.o", 
+"file": "config_common.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/config", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/config/config_parser.c -o /home/user/minimal-model-monoalg/build_release/libconfig/objs/config_parser.c.o", 
+"file": "config_parser.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/config", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/config/postprocessor_config.c -o /home/user/minimal-model-monoalg/build_release/libconfig/objs/postprocessor_config.c.o", 
+"file": "postprocessor_config.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/graph", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/graph/graph.c -o /home/user/minimal-model-monoalg/build_release/libgraph/objs/graph.c.o", 
+"file": "graph.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/graph", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/graph/pqueue.c -o /home/user/minimal-model-monoalg/build_release/libgraph/objs/pqueue.c.o", 
+"file": "pqueue.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/3dparty/xml_parser", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/3dparty/xml_parser/yxml.c -o /home/user/minimal-model-monoalg/build_release/libyxml/objs/yxml.c.o", 
+"file": "yxml.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/3dparty/tinyexpr", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/3dparty/tinyexpr/tinyexpr.c -o /home/user/minimal-model-monoalg/build_release/libtinyexpr/objs/tinyexpr.c.o", 
+"file": "tinyexpr.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/3dparty/miniz", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/3dparty/miniz/miniz.c -o /home/user/minimal-model-monoalg/build_release/libminiz/objs/miniz.c.o", 
+"file": "miniz.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/vtk_utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/vtk_utils/pvd_utils.c -o /home/user/minimal-model-monoalg/build_release/libvtk_utils/objs/pvd_utils.c.o", 
+"file": "pvd_utils.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/vtk_utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/vtk_utils/data_utils.c -o /home/user/minimal-model-monoalg/build_release/libvtk_utils/objs/data_utils.c.o", 
+"file": "data_utils.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/vtk_utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/vtk_utils/vtk_polydata_grid.c -o /home/user/minimal-model-monoalg/build_release/libvtk_utils/objs/vtk_polydata_grid.c.o", 
+"file": "vtk_polydata_grid.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/vtk_utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/vtk_utils/vtk_unstructured_grid.c -o /home/user/minimal-model-monoalg/build_release/libvtk_utils/objs/vtk_unstructured_grid.c.o", 
+"file": "vtk_unstructured_grid.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/logger", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/logger/logger.c -o /home/user/minimal-model-monoalg/build_release/liblogger/objs/logger.c.o", 
+"file": "logger.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/3dparty/tinyfiledialogs", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/3dparty/tinyfiledialogs/tinyfiledialogs.c -o /home/user/minimal-model-monoalg/build_release/libtinyfiledialogs/objs/tinyfiledialogs.c.o", 
+"file": "tinyfiledialogs.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/gui", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/gui/gui.c -o /home/user/minimal-model-monoalg/build_release/libgui/objs/gui.c.o", 
+"file": "gui.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/gui", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/gui/gui_colors.c -o /home/user/minimal-model-monoalg/build_release/libgui/objs/gui_colors.c.o", 
+"file": "gui_colors.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/gui", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/gui/gui_window_helpers.c -o /home/user/minimal-model-monoalg/build_release/libgui/objs/gui_window_helpers.c.o", 
+"file": "gui_window_helpers.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/gui", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/gui/gui_mesh_helpers.c -o /home/user/minimal-model-monoalg/build_release/libgui/objs/gui_mesh_helpers.c.o", 
+"file": "gui_mesh_helpers.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/gui", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/gui/gui_draw.c -o /home/user/minimal-model-monoalg/build_release/libgui/objs/gui_draw.c.o", 
+"file": "gui_draw.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/gui", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/gui/raylib_ext.c -o /home/user/minimal-model-monoalg/build_release/libgui/objs/raylib_ext.c.o", 
+"file": "raylib_ext.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/gpu_utils", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/gpu_utils/gpu_utils.c -o /home/user/minimal-model-monoalg/build_release/libgpu_utils/objs/gpu_utils.c.o", 
+"file": "gpu_utils.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/bondarenko", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/bondarenko/bondarenko_2004.c -o /home/user/minimal-model-monoalg/build_release/libbondarenko_2004/objs/bondarenko_2004.c.o", 
+"file": "bondarenko_2004.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/courtemanche_ramirez_nattel_1998", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/courtemanche_ramirez_nattel_1998/courtemanche_ramirez_nattel_1998.c -o /home/user/minimal-model-monoalg/build_release/libcourtemanche_ramirez_nattel_1998/objs/courtemanche_ramirez_nattel_1998.c.o", 
+"file": "courtemanche_ramirez_nattel_1998.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/difrancesco", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/difrancesco/difrancesco.c -o /home/user/minimal-model-monoalg/build_release/libdifrancesco/objs/difrancesco.c.o", 
+"file": "difrancesco.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/fhn", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/fhn/fhn_mod.c -o /home/user/minimal-model-monoalg/build_release/libfhn_mod/objs/fhn_mod.c.o", 
+"file": "fhn_mod.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/li_rudy", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/li_rudy/li_rudy_2011.c -o /home/user/minimal-model-monoalg/build_release/libli_rudy_2011/objs/li_rudy_2011.c.o", 
+"file": "li_rudy_2011.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/luo_rudy", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/luo_rudy/luo_rudy_1991.c -o /home/user/minimal-model-monoalg/build_release/libluo_rudy_1991/objs/luo_rudy_1991.c.o", 
+"file": "luo_rudy_1991.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/maleckar", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/maleckar/Maleckar2008.c -o /home/user/minimal-model-monoalg/build_release/libMaleckar2008/objs/Maleckar2008.c.o", 
+"file": "Maleckar2008.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/maleckar", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/maleckar/Maleckar2009.c -o /home/user/minimal-model-monoalg/build_release/libMaleckar2009/objs/Maleckar2009.c.o", 
+"file": "Maleckar2009.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/minimal_model", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/minimal_model/minimal_model.c -o /home/user/minimal-model-monoalg/build_release/libminimal_model/objs/minimal_model.c.o", 
+"file": "minimal_model.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/mitchell_shaeffer", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/mitchell_shaeffer/mitchell_shaeffer_2003.c -o /home/user/minimal-model-monoalg/build_release/libmitchell_shaeffer_2003/objs/mitchell_shaeffer_2003.c.o", 
+"file": "mitchell_shaeffer_2003.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/noble", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/noble/noble_1962.c -o /home/user/minimal-model-monoalg/build_release/libnoble_1962/objs/noble_1962.c.o", 
+"file": "noble_1962.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/Ohara_Rudy", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/Ohara_Rudy/Ohara_Rudy_2011.c -o /home/user/minimal-model-monoalg/build_release/libohara_rudy_endo_2011/objs/Ohara_Rudy_2011.c.o", 
+"file": "Ohara_Rudy_2011.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/stewart_aslanidi_noble", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/stewart_aslanidi_noble/stewart_aslanidi_noble_2009.c -o /home/user/minimal-model-monoalg/build_release/libstewart_aslanidi_noble_2009/objs/stewart_aslanidi_noble_2009.c.o", 
+"file": "stewart_aslanidi_noble_2009.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tuscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tuscher/tt3_mixed.c -o /home/user/minimal-model-monoalg/build_release/libtt3_mixed/objs/tt3_mixed.c.o", 
+"file": "tt3_mixed.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tusscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tusscher/ten_tusscher_2006_RS_CPU.c -o /home/user/minimal-model-monoalg/build_release/libten_tusscher_2006/objs/ten_tusscher_2006_RS_CPU.c.o", 
+"file": "ten_tusscher_2006_RS_CPU.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tusscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tusscher/ten_tusscher_2004_RS_CPU.c -o /home/user/minimal-model-monoalg/build_release/libten_tusscher_2004_endo/objs/ten_tusscher_2004_RS_CPU.c.o", 
+"file": "ten_tusscher_2004_RS_CPU.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tusscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI -DENDO -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tusscher/ten_tusscher_3_RS_CPU.c -o /home/user/minimal-model-monoalg/build_release/libten_tusscher_3_endo/objs/ten_tusscher_3_RS_CPU.c.o", 
+"file": "ten_tusscher_3_RS_CPU.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tusscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI -DEPI -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tusscher/ten_tusscher_3_RS_CPU.c -o /home/user/minimal-model-monoalg/build_release/libten_tusscher_3_epi/objs/ten_tusscher_3_RS_CPU.c.o", 
+"file": "ten_tusscher_3_RS_CPU.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tusscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tusscher/ten_tusscher_2004_RS_CPU_epi.c -o /home/user/minimal-model-monoalg/build_release/libten_tusscher_2004_epi/objs/ten_tusscher_2004_RS_CPU_epi.c.o", 
+"file": "ten_tusscher_2004_RS_CPU_epi.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tusscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tusscher/mixed_tentusscher_myo_epi_2004.c -o /home/user/minimal-model-monoalg/build_release/libmixed_tentusscher_myo_epi_2004/objs/mixed_tentusscher_myo_epi_2004.c.o", 
+"file": "mixed_tentusscher_myo_epi_2004.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ten_tusscher", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ten_tusscher/ten_tusscher_2004_mixed_endo_mid_epi.c -o /home/user/minimal-model-monoalg/build_release/libten_tusscher_2004_mixed_endo_mid_epi/objs/ten_tusscher_2004_mixed_endo_mid_epi.c.o", 
+"file": "ten_tusscher_2004_mixed_endo_mid_epi.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ToROrd", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ToROrd/ToRORd_fkatp_endo.c -o /home/user/minimal-model-monoalg/build_release/libToRORd_fkatp_endo/objs/ToRORd_fkatp_endo.c.o", 
+"file": "ToRORd_fkatp_endo.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/ToROrd", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/ToROrd/ToRORd_fkatp_mixed_endo_mid_epi.c -o /home/user/minimal-model-monoalg/build_release/libToRORd_fkatp_mixed_endo_mid_epi/objs/ToRORd_fkatp_mixed_endo_mid_epi.c.o", 
+"file": "ToRORd_fkatp_mixed_endo_mid_epi.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/trovato", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/trovato/trovato_2019.c -o /home/user/minimal-model-monoalg/build_release/libtrovato_2019/objs/trovato_2019.c.o", 
+"file": "trovato_2019.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/models_library/trovato", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/models_library/trovato/trovato_2020.c -o /home/user/minimal-model-monoalg/build_release/libtrovato_2020/objs/trovato_2020.c.o", 
+"file": "trovato_2020.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/stimuli_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/stimuli_library/stimuli.c -o /home/user/minimal-model-monoalg/build_release/libdefault_stimuli/objs/stimuli.c.o", 
+"file": "stimuli.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/domains_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/domains_library/domain.c -o /home/user/minimal-model-monoalg/build_release/libdefault_domains/objs/domain.c.o", 
+"file": "domain.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/domains_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/domains_library/custom_functions.c -o /home/user/minimal-model-monoalg/build_release/libdefault_domains/objs/custom_functions.c.o", 
+"file": "custom_functions.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/domains_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/domains_library/domain_helpers.c -o /home/user/minimal-model-monoalg/build_release/libdefault_domains/objs/domain_helpers.c.o", 
+"file": "domain_helpers.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/purkinje_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/purkinje_library/purkinje.c -o /home/user/minimal-model-monoalg/build_release/libdefault_purkinje/objs/purkinje.c.o", 
+"file": "purkinje.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/purkinje_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/purkinje_library/purkinje_helpers.c -o /home/user/minimal-model-monoalg/build_release/libdefault_purkinje/objs/purkinje_helpers.c.o", 
+"file": "purkinje_helpers.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/extra_data_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/extra_data_library/extra_data.c -o /home/user/minimal-model-monoalg/build_release/libdefault_extra_data/objs/extra_data.c.o", 
+"file": "extra_data.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/extra_data_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/extra_data_library/helper_functions.c -o /home/user/minimal-model-monoalg/build_release/libdefault_extra_data/objs/helper_functions.c.o", 
+"file": "helper_functions.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/extra_data_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/extra_data_library/custom_functions.c -o /home/user/minimal-model-monoalg/build_release/libdefault_extra_data/objs/custom_functions.c.o", 
+"file": "custom_functions.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/matrix_assembly_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/matrix_assembly_library/matrix_assembly.c -o /home/user/minimal-model-monoalg/build_release/libdefault_matrix_assembly/objs/matrix_assembly.c.o", 
+"file": "matrix_assembly.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/matrix_assembly_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/matrix_assembly_library/custom_functions.c -o /home/user/minimal-model-monoalg/build_release/libdefault_matrix_assembly/objs/custom_functions.c.o", 
+"file": "custom_functions.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/matrix_assembly_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/matrix_assembly_library/purkinje_matrix_assembly.c -o /home/user/minimal-model-monoalg/build_release/libpurkinje_matrix_assembly/objs/purkinje_matrix_assembly.c.o", 
+"file": "purkinje_matrix_assembly.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/matrix_assembly_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/matrix_assembly_library/purkinje_coupling_matrix_assembly.c -o /home/user/minimal-model-monoalg/build_release/libpurkinje_coupling_matrix_assembly/objs/purkinje_coupling_matrix_assembly.c.o", 
+"file": "purkinje_coupling_matrix_assembly.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/linear_system_solver_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/linear_system_solver_library/linear_system_solver.c -o /home/user/minimal-model-monoalg/build_release/libdefault_linear_system_solver/objs/linear_system_solver.c.o", 
+"file": "linear_system_solver.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/save_mesh_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/save_mesh_library/save_mesh_helper.c -o /home/user/minimal-model-monoalg/build_release/libdefault_save_mesh/objs/save_mesh_helper.c.o", 
+"file": "save_mesh_helper.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/save_mesh_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/save_mesh_library/save_mesh.c -o /home/user/minimal-model-monoalg/build_release/libdefault_save_mesh/objs/save_mesh.c.o", 
+"file": "save_mesh.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/save_mesh_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/save_mesh_library/save_mesh_helper.c -o /home/user/minimal-model-monoalg/build_release/libdefault_save_mesh_purkinje/objs/save_mesh_helper.c.o", 
+"file": "save_mesh_helper.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/save_mesh_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/save_mesh_library/save_mesh_purkinje.c -o /home/user/minimal-model-monoalg/build_release/libdefault_save_mesh_purkinje/objs/save_mesh_purkinje.c.o", 
+"file": "save_mesh_purkinje.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/save_state_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/save_state_library/save_state.c -o /home/user/minimal-model-monoalg/build_release/libdefault_save_state/objs/save_state.c.o", 
+"file": "save_state.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/restore_state_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/restore_state_library/restore_state.c -o /home/user/minimal-model-monoalg/build_release/libdefault_restore_state/objs/restore_state.c.o", 
+"file": "restore_state.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/update_monodomain_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/update_monodomain_library/update_monodomain.c -o /home/user/minimal-model-monoalg/build_release/libdefault_update_monodomain/objs/update_monodomain.c.o", 
+"file": "update_monodomain.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/modify_domain", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/modify_domain/modify_domain.c -o /home/user/minimal-model-monoalg/build_release/libdefault_modify_domain/objs/modify_domain.c.o", 
+"file": "modify_domain.c" 
+},
+{
+"directory": "/home/user/minimal-model-monoalg/src/ecg_library", 
+"command": "/usr/bin/gcc-12.2 -DCELL_MODEL_REAL_DOUBLE -O3 -fopenmp -std=gnu99 -fno-strict-aliasing  -Wall -Wno-stringop-truncation -Wno-unused-function -Wno-char-subscripts -Wno-unused-result -Wno-switch -Werror=implicit-function-declaration -DCOMPILE_CUDA -I/usr/local/cuda/include/ -DCOMPILE_GUI  -fPIC -c /home/user/minimal-model-monoalg/src/ecg_library/ecg.c -o /home/user/minimal-model-monoalg/build_release/libdefault_calc_ecg/objs/ecg.c.o", 
+"file": "ecg.c" 
+},
 ]

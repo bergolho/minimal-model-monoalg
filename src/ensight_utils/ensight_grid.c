@@ -134,6 +134,60 @@ void save_en6_result_file(char *filename, struct grid *the_grid, bool binary) {
         new_line(result_file, binary);
 
         for(int i = 0 ; i < the_grid->num_active_cells; i++) {
+            float v = (float) (the_grid->active_cells[i]->v);
+            write_float(v, result_file, binary);
+            new_line(result_file, binary);
+
+        }
+        part_number++;
+    }
+
+    if(the_grid->purkinje) {
+        write_string("part", result_file, binary);
+        new_line(result_file, binary);
+
+        write_int(part_number, result_file, binary);
+        new_line(result_file, binary);
+
+        write_string("bar2", result_file, binary);
+        new_line(result_file, binary);
+
+        for(int i = 0 ; i < the_grid->purkinje->number_of_purkinje_cells - 1 ; i++) {
+            float v = (float) the_grid->purkinje->purkinje_cells[i]->v;
+            write_float(v, result_file, binary);
+            new_line(result_file, binary);
+        }
+    }
+
+    fclose(result_file);
+}
+
+void save_en6_result_file_mm(char *filename, struct grid *the_grid, bool binary) {
+
+    FILE *result_file;
+
+    if(binary) {
+        result_file = fopen(filename, "wb");
+    } else {
+        result_file = fopen(filename, "w");
+    }
+
+    write_string("Per element Vm", result_file, binary);
+    new_line(result_file, binary);
+
+    int part_number = 1;
+
+    if(the_grid->num_active_cells > 0) {
+        write_string("part", result_file, binary);
+        new_line(result_file, binary);
+
+        write_int(part_number, result_file, binary);
+        new_line(result_file, binary);
+
+        write_string("hexa8", result_file, binary);
+        new_line(result_file, binary);
+
+        for(int i = 0 ; i < the_grid->num_active_cells; i++) {
             float v = (float) ((the_grid->active_cells[i]->v) * 85.7 - 84.0);
             write_float(v, result_file, binary);
             new_line(result_file, binary);

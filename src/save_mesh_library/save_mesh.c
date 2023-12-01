@@ -707,6 +707,132 @@ SAVE_MESH(save_as_ensight) {
     CALL_EXTRA_FUNCTIONS(save_mesh_fn, time_info, config, the_grid, ode_solver, purkinje_ode_solver);
 }
 
+SAVE_MESH(save_as_ensight_mm) {
+
+    struct common_persistent_data *persistent_data = (struct common_persistent_data*) config->persistent_data;
+
+    if(the_grid == NULL && the_grid->purkinje == NULL) {
+        log_error_and_exit("Error in save_as_ensight. No grid and/or no purkinje grid defined\n");
+    }
+
+    if(the_grid != NULL && the_grid->adaptive) {
+        log_error_and_exit("save_as_ensight function does not support adaptive meshes yet! Aborting\n");
+    }
+
+    static int n_state_vars = 0;
+    static bool geometry_saved = false;
+    static uint32_t num_files = 0;
+
+    if(!geometry_saved) {
+
+        int print_rate = 1;
+
+        char *mesh_format = NULL;
+        GET_PARAMETER_STRING_VALUE_OR_USE_DEFAULT(mesh_format, config, "mesh_format");
+
+        //We are getting called from save_with_activation_times
+        if(mesh_format != NULL) {
+            GET_PARAMETER_NUMERIC_VALUE_OR_USE_DEFAULT(int, print_rate, config, "mesh_print_rate");
+        }
+        else { //We are being directly called
+            GET_PARAMETER_NUMERIC_VALUE_OR_USE_DEFAULT(int, print_rate, config, "print_rate");
+        }
+
+        GET_PARAMETER_STRING_VALUE_OR_REPORT_ERROR(output_dir, config, "output_dir");
+        GET_PARAMETER_BOOLEAN_VALUE_OR_USE_DEFAULT(binary, config, "binary");
+        GET_PARAMETER_BOOLEAN_VALUE_OR_USE_DEFAULT(save_visible_mask, config, "save_visible_mask");
+        GET_PARAMETER_BOOLEAN_VALUE_OR_USE_DEFAULT(save_ode_state_variables, config, "save_ode_state_variables");
+
+        num_files = ((time_info->final_t / time_info->dt) / print_rate) + 1;
+
+        sds output_dir_with_file = sdsnew(output_dir);
+        output_dir_with_file = sdscat(output_dir_with_file, "/geometry.geo");
+
+        struct ensight_grid *ensight_grid = new_ensight_grid_from_alg_grid(the_grid, false, NULL, false, NULL, false, false);
+        save_ensight_grid_as_ensight6_geometry(ensight_grid, output_dir_with_file, binary);
+
+        if(save_visible_mask) {
+            save_visibility_mask(output_dir_with_file, ensight_grid->parts[0].cell_visibility);
+        }
+
+        free_ensight_grid(ensight_grid);
+
+        sdsfree(output_dir_with_file);
+
+        output_dir_with_file = sdsnew(output_dir);
+        output_dir_with_file = sdscat(output_dir_with_file, "/simulation_result.case");
+
+        if(save_ode_state_variables) {
+            n_state_vars = ode_solver->model_data.number_of_ode_equations - 1; // Vm is always saved
+        }
+
+        save_case_file(output_dir_with_file, num_files, time_info->dt, print_rate, n_state_vars);
+
+        sdsfree(output_dir_with_file);
+        geometry_saved = true;
+    }
+
+    sds output_dir_with_file = sdsnew(output_dir);
+    output_dir_with_file = sdscat(output_dir_with_file, "/");
+
+    if(persistent_data->n_digits == 0) {
+        persistent_data->n_digits = log10(num_files*500) + 1;
+    }
+
+    sds base_name = sdscatprintf(sdsempty(), "Vm.Esca%%0%dd", persistent_data->n_digits);
+
+    char tmp[8192];
+    sprintf(tmp, base_name, persistent_data->file_count);
+
+    output_dir_with_file = sdscatprintf(output_dir_with_file, "/%s", tmp);
+
+    save_en6_result_file_mm(output_dir_with_file, the_grid, binary);
+
+    sdsfree(base_name);
+    sdsfree(output_dir_with_file);
+
+    if(n_state_vars) {
+        size_t num_sv_entries = ode_solver->model_data.number_of_ode_equations;
+        base_name = sdscatprintf(sdsempty(), "Sv%%d.Esca%%0%dd", persistent_data->n_digits);
+        real *sv_cpu;
+
+        if(ode_solver->gpu) {
+
+#ifdef COMPILE_CUDA
+            sv_cpu = MALLOC_ARRAY_OF_TYPE(real, ode_solver->original_num_cells * num_sv_entries);
+            check_cuda_error(cudaMemcpy2D(sv_cpu, ode_solver->original_num_cells * sizeof(real), ode_solver->sv, ode_solver->pitch,
+                                          ode_solver->original_num_cells * sizeof(real), num_sv_entries, cudaMemcpyDeviceToHost));
+#endif
+        } else {
+            sv_cpu = ode_solver->sv;
+        }
+
+        for(int i = 1; i <= n_state_vars; i++) {
+
+            char tmp[8192];
+            sprintf(tmp, base_name, i, persistent_data->file_count);
+
+            sds output_dir_with_file = sdsnew(output_dir);
+            output_dir_with_file = sdscat(output_dir_with_file, "/");
+
+            output_dir_with_file = sdscatprintf(output_dir_with_file, "/%s", tmp);
+
+            save_en6_result_file_state_vars(output_dir_with_file, sv_cpu, ode_solver->original_num_cells, num_sv_entries, i, binary, ode_solver->gpu);
+            sdsfree(output_dir_with_file);
+        }
+
+        sdsfree(base_name);
+
+        if(ode_solver->gpu) {
+            free(sv_cpu);
+        }
+    }
+
+    persistent_data->file_count++;
+
+    CALL_EXTRA_FUNCTIONS(save_mesh_fn, time_info, config, the_grid, ode_solver, purkinje_ode_solver);
+}
+
 END_SAVE_MESH(end_save_as_ensight) {
     free(config->persistent_data);
     config->persistent_data = NULL;
@@ -752,6 +878,167 @@ SAVE_MESH(save_with_activation_times) {
                 save_as_vtu(time_info, config, the_grid, ode_solver, purkinje_ode_solver);
             } else if(STRINGS_EQUAL("ensight", mesh_format)) {
                 save_as_ensight(time_info, config, the_grid, ode_solver, purkinje_ode_solver);
+            } else if(STRINGS_EQUAL("txt", mesh_format)) {
+                save_as_text_or_binary(time_info, config, the_grid, ode_solver, purkinje_ode_solver);
+            }
+        }
+    }
+
+    float time_threshold = 10.0f;
+    GET_PARAMETER_NUMERIC_VALUE_OR_USE_DEFAULT(float, time_threshold, config, "time_threshold");
+
+    GET_PARAMETER_STRING_VALUE_OR_REPORT_ERROR(output_dir, config, "output_dir");
+
+    float activation_threshold = -30.0f;
+    GET_PARAMETER_NUMERIC_VALUE_OR_USE_DEFAULT(float, activation_threshold, config, "activation_threshold");
+
+    float apd_threshold = -83.0f;
+    GET_PARAMETER_NUMERIC_VALUE_OR_USE_DEFAULT(float, apd_threshold, config, "apd_threshold");
+
+    real_cpu current_t = time_info->current_t;
+    real_cpu last_t = time_info->final_t;
+    real_cpu dt = time_info->dt;
+
+    sds output_dir_with_file = sdsnew(output_dir);
+    output_dir_with_file = sdscat(output_dir_with_file, "/");
+    sds base_name = create_base_name("activation_info", 0, "acm");
+    output_dir_with_file = sdscatprintf(output_dir_with_file, base_name, current_t);
+
+    struct common_persistent_data *persistent_data = (struct common_persistent_data *)config->persistent_data;
+
+    struct cell_node *grid_cell = the_grid->first_cell;
+
+    real_cpu center_x, center_y, center_z, dx, dy, dz;
+    real_cpu v;
+
+    FILE *act_file = fopen(output_dir_with_file, "w");
+
+    fprintf(act_file, "%d\n", (last_t - current_t) <= dt); // rounding errors
+
+    while(grid_cell != 0) {
+
+        if(grid_cell->active || (grid_cell->mesh_extra_info && (FIBROTIC(grid_cell) || BORDER_ZONE(grid_cell)))) {
+
+            center_x = grid_cell->center.x;
+            center_y = grid_cell->center.y;
+            center_z = grid_cell->center.z;
+
+            v = grid_cell->v;
+
+            struct point_3d cell_coordinates;
+            cell_coordinates.x = center_x;
+            cell_coordinates.y = center_y;
+            cell_coordinates.z = center_z;
+
+            dx = grid_cell->discretization.x / 2.0;
+            dy = grid_cell->discretization.y / 2.0;
+            dz = grid_cell->discretization.z / 2.0;
+
+            if(grid_cell->mesh_extra_info) {
+                fprintf(act_file, "%g,%g,%g,%g,%g,%g,%d,%d,%d ", center_x, center_y, center_z, dx, dy, dz, grid_cell->active, FIBROTIC(grid_cell),
+                        BORDER_ZONE(grid_cell));
+            } else {
+                fprintf(act_file, "%g,%g,%g,%g,%g,%g ", center_x, center_y, center_z, dx, dy, dz);
+            }
+
+            int n_activations = 0;
+            float *apds_array = NULL;
+            float *activation_times_array = NULL;
+
+            if(grid_cell->active) {
+                float last_v = hmget(persistent_data->last_time_v, cell_coordinates);
+
+                n_activations = (int)hmget(persistent_data->num_activations, cell_coordinates);
+                activation_times_array = (float *)hmget(persistent_data->activation_times, cell_coordinates);
+                apds_array = (float *)hmget(persistent_data->apds, cell_coordinates);
+
+                int act_times_len = arrlen(activation_times_array);
+
+                if(current_t == 0.0f) {
+                    hmput(persistent_data->last_time_v, cell_coordinates, v);
+                } else {
+                    if((last_v < activation_threshold) && (v >= activation_threshold)) {
+
+                        if(act_times_len == 0) {
+                            n_activations++;
+                            hmput(persistent_data->num_activations, cell_coordinates, n_activations);
+                            arrput(activation_times_array, current_t);
+                            float tmp = hmget(persistent_data->cell_was_active, cell_coordinates);
+                            hmput(persistent_data->cell_was_active, cell_coordinates, tmp + 1);
+                            hmput(persistent_data->activation_times, cell_coordinates, activation_times_array);
+                        } else { // This is to avoid spikes in the middle of an Action Potential
+                            float last_act_time = activation_times_array[act_times_len - 1];
+                            if(current_t - last_act_time > time_threshold) {
+                                n_activations++;
+                                hmput(persistent_data->num_activations, cell_coordinates, n_activations);
+                                arrput(activation_times_array, current_t);
+                                float tmp = hmget(persistent_data->cell_was_active, cell_coordinates);
+                                hmput(persistent_data->cell_was_active, cell_coordinates, tmp + 1);
+                                hmput(persistent_data->activation_times, cell_coordinates, activation_times_array);
+                            }
+                        }
+                    }
+
+                    // CHECK APD
+                    bool was_active = (hmget(persistent_data->cell_was_active, cell_coordinates) != 0.0);
+                    if(was_active) {
+                        if(v <= apd_threshold || (hmget(persistent_data->cell_was_active, cell_coordinates) == 2.0)) {
+
+                            int tmp = (int)hmget(persistent_data->cell_was_active, cell_coordinates);
+                            int act_time_array_len = arrlen(activation_times_array);
+                            // if this in being calculated because we had a new activation before the cell achieved the rest potential,
+                            //  we need to get the activation before this one
+                            real_cpu last_act_time = activation_times_array[act_time_array_len - tmp];
+                            real_cpu apd = current_t - last_act_time;
+                            arrput(apds_array, apd);
+                            hmput(persistent_data->apds, cell_coordinates, apds_array);
+                            hmput(persistent_data->cell_was_active, cell_coordinates, tmp - 1);
+                        }
+                    }
+
+                    hmput(persistent_data->last_time_v, cell_coordinates, v);
+                }
+            }
+
+            fprintf(act_file, "%d [ ", n_activations);
+
+            for(unsigned long i = 0; i < n_activations; i++) {
+                fprintf(act_file, "%lf ", activation_times_array[i]);
+            }
+            fprintf(act_file, "] ");
+
+            fprintf(act_file, "[ ");
+
+            for(unsigned long i = 0; i < arrlen(apds_array); i++) {
+                fprintf(act_file, "%lf ", apds_array[i]);
+            }
+            fprintf(act_file, "]\n");
+        }
+
+        grid_cell = grid_cell->next;
+    }
+
+    fclose(act_file);
+
+    CALL_EXTRA_FUNCTIONS(save_mesh_fn, time_info, config, the_grid, ode_solver, purkinje_ode_solver);
+}
+
+SAVE_MESH(save_with_activation_times_mm) {
+
+    int iteration_count = time_info->iteration;
+    struct common_persistent_data *cpd = (struct common_persistent_data *) config->persistent_data;
+
+    char *mesh_format = NULL;
+    GET_PARAMETER_STRING_VALUE_OR_USE_DEFAULT(mesh_format, config, "mesh_format");
+
+    if(mesh_format && cpd->mesh_print_rate) {
+        if(iteration_count % cpd->mesh_print_rate == 0) {
+            if(STRINGS_EQUAL("vtk", mesh_format)) {
+                save_as_vtk(time_info, config, the_grid, ode_solver, purkinje_ode_solver);
+            } else if(STRINGS_EQUAL("vtu", mesh_format)) {
+                save_as_vtu(time_info, config, the_grid, ode_solver, purkinje_ode_solver);
+            } else if(STRINGS_EQUAL("ensight", mesh_format)) {
+                save_as_ensight_mm(time_info, config, the_grid, ode_solver, purkinje_ode_solver);
             } else if(STRINGS_EQUAL("txt", mesh_format)) {
                 save_as_text_or_binary(time_info, config, the_grid, ode_solver, purkinje_ode_solver);
             }
