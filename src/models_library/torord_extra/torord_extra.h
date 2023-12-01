@@ -73,13 +73,13 @@
 
 #include "../../gpu_utils/gpu_utils.h"
 
-__global__ void kernel_set_model_initial_conditions(real *sv, int num_volumes, size_t pitch, bool use_adpt_dt, real min_dt);
+__global__ void kernel_set_model_initial_conditions(real *sv, int num_volumes, size_t pitch, bool use_adpt_dt, real min_dt, uint32_t *mapping);
 __global__ void kernel_set_model_initial_conditions_endo_mid_epi(real *sv, int num_volumes, size_t pitch, bool use_adpt_dt, real min_dt,\
-                                                real *initial_endo, real *initial_epi, real *initial_mid, real *transmurality);
+                                                uint32_t *transmurality);
 
-__global__ void solve_gpu(real cur_time, real dt, real *sv, real *stim_currents, uint32_t *cells_to_solve,\
+__global__ void solve_gpu(real cur_time, real dt, real *sv, real *stim_currents, uint32_t *cells_to_solve, uint32_t *mapping,\
                           uint32_t num_cells_to_solve, int num_steps, size_t pitch, bool use_adpt, real abstol, real reltol, real max_dt);
-__global__ void solve_endo_mid_epi_gpu(real cur_time, real dt, real *sv, real *stim_currents, uint32_t *cells_to_solve, real *transmurality,\
+__global__ void solve_endo_mid_epi_gpu(real cur_time, real dt, real *sv, real *stim_currents, uint32_t *cells_to_solve, uint32_t *mapping,\
                           uint32_t num_cells_to_solve, int num_steps, size_t pitch, bool use_adpt, real abstol, real reltol, real max_dt);
 
 inline __device__ void RHS_gpu(real *sv, real *rDY_, real stim_current, real transmurality, int threadID_, real dt, size_t pitch, bool use_adpt_dt);
