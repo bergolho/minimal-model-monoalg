@@ -66,13 +66,13 @@ extern "C" SOLVE_MODEL_ODES(solve_model_odes_gpu) {
 
     uint32_t *mapping = NULL;
     uint32_t *mapping_device = NULL;
-    if(ode_solver->ode_extra_data) 
+    if(ode_solver->ode_extra_data)
     {
         mapping = (uint32_t*)ode_solver->ode_extra_data;
         check_cuda_error(cudaMalloc((void **)&mapping_device, ode_solver->extra_data_size));
         check_cuda_error(cudaMemcpy(mapping_device, mapping, ode_solver->extra_data_size, cudaMemcpyHostToDevice));
     }
-    else 
+    else
     {
         log_error_and_exit("You need to specify a mask function when using a mixed model!\n");
     }
@@ -124,15 +124,7 @@ __global__ void solve_gpu(real dt, real *sv, real* stim_currents,
 
         for (int n = 0; n < num_steps; ++n) {
 
-            if (mapping[sv_id] == 0) {
-                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, 0);
-            }
-            else if(mapping[sv_id] == 1){
-                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, 1);
-            }
-            else {
-                RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, 2);
-            }
+            RHS_gpu(sv, rDY, stim_currents[threadID], sv_id, dt, mapping[sv_id]);
 
             *((real*)((char*)sv) + sv_id) = dt*rDY[0] + *((real*)((char*)sv) + sv_id);
             // *((real*)((char*)sv) + sv_id) = dt*rDY[1] + *((real*)((char*)sv) + sv_id);
@@ -140,7 +132,8 @@ __global__ void solve_gpu(real dt, real *sv, real* stim_currents,
             // *((real*)((char*)sv) + sv_id) = dt*rDY[3] + *((real*)((char*)sv) + sv_id);
 
             for(int i = 1; i < NEQ; i++) {
-                *((real*)((char*)sv + pitch * i) + sv_id) = dt*rDY[i] + *((real*)((char*)sv + pitch * i) + sv_id);
+                // *((real*)((char*)sv + pitch * i) + sv_id) = dt*rDY[i] + *((real*)((char*)sv + pitch * i) + sv_id);
+                *((real*)((char*)sv + pitch * i) + sv_id) = rDY[i];
             }
 
         }
@@ -156,7 +149,6 @@ inline __device__ void RHS_gpu(real *sv_, real *rDY_, real stim_current, int thr
     const real w   = *((real*)((char*)sv_ + pitch * 2) + threadID_);
     const real s   = *((real*)((char*)sv_ + pitch * 3) + threadID_);
 
-    // Constants
     const real u_o = 0.0;
     const real theta_v = 0.3;
     const real theta_w = 0.13;
@@ -165,187 +157,73 @@ inline __device__ void RHS_gpu(real *sv_, real *rDY_, real stim_current, int thr
     const real k_s = 2.0994;
     const real u_s = 0.9087;
 
-    //real u_o = 0.0;
-    real u_u;
-    //real theta_v;
-    //real theta_w;
-    real theta_vminus;
-    real theta_o;
-    real tau_v1minus;
-    real tau_v2minus;
-    //real tau_vplus;
-    real tau_w1minus;
-    real tau_w2minus;
-    real k_wminus;
-    real u_wminus;
-    real tau_wplus;
-    real tau_fi;
-    real tau_o1;
-    real tau_o2;
-    real tau_so1;
-    real tau_so2;
-    real k_so;
-    real u_so;
-    //real tau_s1;
-    real tau_s2;
-    //real k_s;
-    //real u_s;
-    real tau_si;
-    real tau_winf;
-    real w_infstar;
+    real u_u, theta_vminus, theta_o, tau_v1minus, tau_v2minus, tau_w1minus, tau_w2minus;
+    real k_wminus, u_wminus, tau_wplus, tau_fi, tau_o1, tau_o2, tau_so1, tau_so2;
+    real k_so, u_so, tau_s2, tau_si, tau_winf, w_infstar;
 
     if (type_cell == 0) {        // ENDO
-      //u_o = 0.0;
-      u_u = 1.56;
-      //theta_v = 0.3;
-      //theta_w = 0.13;
-      theta_vminus = 0.2;
-      theta_o = 0.006;
-      tau_v1minus = 75.0;
-      tau_v2minus = 10.0;
-      //tau_vplus = 1.4506;
-      tau_w1minus = 6.0;
-      tau_w2minus = 140.0;
-      k_wminus = 200.0;
-      u_wminus = 0.016;
-      tau_wplus = 280.0;
-      tau_fi = 0.1;
-      tau_o1 = 470.0;
-      tau_o2 = 6.0;
-      tau_so1 = 40.0;
-      tau_so2 = 1.2;
-      k_so = 2.0;
-      u_so = 0.65;
-      //tau_s1 = 2.7342;
-      tau_s2 = 2.0;
-      //k_s = 2.0994;
-      //u_s = 0.9087;
-      tau_si = 2.9013;
-      tau_winf = 0.0273;
-      w_infstar = 0.78;
-    }
-    else if (type_cell == 1) {   // MYO
-      //u_o = 0.0;
-      u_u = 1.61;
-      //theta_v = 0.3;
-      //theta_w = 0.13;
-      theta_vminus = 0.1;
-      theta_o = 0.005;
-      tau_v1minus = 80.0;
-      tau_v2minus = 1.4506;
-      //tau_vplus = 1.4506;
-      tau_w1minus = 70.0;
-      tau_w2minus = 8.0;
-      k_wminus = 200.0;
-      u_wminus = 0.016;
-      tau_wplus = 280.0;
-      tau_fi = 0.078;
-      tau_o1 = 410.0;
-      tau_o2 = 7.0;
-      tau_so1 = 91.0;
-      tau_so2 = 0.8;
-      k_so = 2.1;
-      u_so = 0.6;
-      //tau_s1 = 2.7342;
-      tau_s2 = 4.0;
-      //k_s = 2.0994;
-      //u_s = 0.9087;
-      tau_si = 3.3849;
-      tau_winf = 0.01;
-      w_infstar = 0.5;
-    }
-    else {                       // EPI
-      //u_o = 0.0;
-      u_u = 1.55;
-      //theta_v = 0.3;
-      //theta_w = 0.13;
-      theta_vminus = 0.006;
-      theta_o = 0.006;
-      tau_v1minus = 60.0;
-      tau_v2minus = 1150.0;
-      //tau_vplus = 1.4506;
-      tau_w1minus = 60.0;
-      tau_w2minus = 15.0;
-      k_wminus = 65.0;
-      u_wminus = 0.03;
-      tau_wplus = 200.0;
-      tau_fi = 0.11;
-      tau_o1 = 400.0;
-      tau_o2 = 6.0;
-      tau_so1 = 30.0181;
-      tau_so2 = 0.9957;
-      k_so = 2.0458;
-      u_so = 0.65;
-      //tau_s1 = 2.7342;
-      tau_s2 = 16.0;
-      //k_s = 2.0994;
-      //u_s = 0.9087;
-      tau_si = 1.8875;
-      tau_winf = 0.07;
-      w_infstar = 0.94;
+        u_u = 1.56; theta_vminus = 0.2; theta_o = 0.006; tau_v1minus = 75.0; tau_v2minus = 10.0;
+        tau_w1minus = 6.0; tau_w2minus = 140.0; k_wminus = 200.0; u_wminus = 0.016;
+        tau_wplus = 280.0; tau_fi = 1.5*0.1; tau_o1 = 470.0; tau_o2 = 6.0; tau_so1 = 40.0;
+        tau_so2 = 1.2; k_so = 2.0; u_so = 0.65; tau_s2 = 2.0; tau_si = 2.9013;
+        tau_winf = 0.0273; w_infstar = 0.78;
+    } else if (type_cell == 1) { // MYO
+        u_u = 1.61; theta_vminus = 0.1; theta_o = 0.005; tau_v1minus = 80.0; tau_v2minus = 1.4506;
+        tau_w1minus = 70.0; tau_w2minus = 8.0; k_wminus = 200.0; u_wminus = 0.016;
+        tau_wplus = 280.0; tau_fi = 1.5*0.078; tau_o1 = 410.0; tau_o2 = 7.0; tau_so1 = 91.0;
+        tau_so2 = 0.8; k_so = 2.1; u_so = 0.6; tau_s2 = 4.0; tau_si = 3.3849;
+        tau_winf = 0.01; w_infstar = 0.5;
+    } else {                    // EPI
+        u_u = 1.55; theta_vminus = 0.006; theta_o = 0.006; tau_v1minus = 60.0; tau_v2minus = 1150.0;
+        tau_w1minus = 60.0; tau_w2minus = 15.0; k_wminus = 65.0; u_wminus = 0.03;
+        tau_wplus = 200.0; tau_fi = 1.5*0.11; tau_o1 = 400.0; tau_o2 = 6.0; tau_so1 = 30.0181;
+        tau_so2 = 0.9957; k_so = 2.0458; u_so = 0.65; tau_s2 = 16.0; tau_si = 1.8875;
+        tau_winf = 0.07; w_infstar = 0.94;
     }
 
-        // Get du_dt, dv_dt, dw_dt and ds_dt
-        //du_dt = - reaction_u(ustep, vstep, wstep, sstep) + I_stim;
-        //
-        real H = 0.0;
-        real h_o = 0.0;
-        real h_w = 0.0;
-        real h_v_minus = 0.0;
-        real tau_vminus = 0.0;
-        real J_fi = 0.0;
-        real J_so = 0.0;
-        real J_si = 0.0;
-        real tau_o = 0.0;
-        real tau_so = 0.0;
-        real tau_s = 0.0;
-        // real du_dt = 0.0;
-        // real dv_dt = 0.0;
-        // real dw_dt = 0.0;
-        // real ds_dt = 0.0;
-        real v_inf = 0.0;
-        real w_inf = 0.0;
-        real tau_wminus = 0.0;
-        real I_stim = stim_current;
+    real H = (u - theta_v > 0) ? 1.0 : 0.0;
+    real h_o = (u - theta_o > 0) ? 1.0 : 0.0;
+    real h_w = (u - theta_w > 0) ? 1.0 : 0.0;
+    real h_v_minus = (u - theta_vminus > 0) ? 1.0 : 0.0;
 
-        if (u-theta_v > 0)
-          H = 1.0;
-        J_fi = -v * H * (u-theta_v) * (u_u-u) / tau_fi;
-        if (u-theta_o > 0)
-          h_o = 1.0;
-        tau_o = (1.0 - h_o) * tau_o1 + (h_o * tau_o2);
-        if (u-theta_w > 0)
-          h_w = 1.0;
-        tau_so = tau_so1 + (((tau_so2 - tau_so1) * (1.0 + tanh(k_so*(u - u_so)))) * 0.5);
-        J_so = ((u-u_o) * (1.0 - h_w) / tau_o) + (h_w / tau_so);
-        J_si = - h_w * w * s / tau_si;
-        rDY_[0] = - (J_fi + J_so + J_si) + I_stim;
-        //
+    real tau_o = (1.0 - h_o) * tau_o1 + h_o * tau_o2;
+    real tau_so = tau_so1 + (tau_so2 - tau_so1) * (1.0 + tanh(k_so * (u - u_so))) * 0.5;
+    real tau_vminus = (1.0 - h_v_minus) * tau_v1minus + h_v_minus * tau_v2minus;
 
-        //dv_dt = dvdt(ustep, vstep);
-        //
-        if (u < theta_vminus)
-        {
-            v_inf = 1.0;
-        }
-        if (u-theta_vminus > 0)
-          h_v_minus = 1.0;
-        tau_vminus = (1.0 - h_v_minus) * tau_v1minus + (h_v_minus * tau_v2minus);
-        rDY_[1] = (1.0 - H) * (v_inf - v) / tau_vminus - (H * v / tau_vplus);
-        //
+    real J_fi = -v * H * (u - theta_v) * (u_u - u) / tau_fi;
+    real J_so = (u - u_o) * (1.0 - h_w) / tau_o + h_w / tau_so;
+    real J_si = -h_w * w * s / tau_si;
 
-        //dw_dt = dwdt(ustep, wstep);
-        //
-        w_inf = (1.0 - h_o) * (1.0 - (u/tau_winf)) + (h_o * w_infstar);
-        tau_wminus = tau_w1minus + (((tau_w2minus - tau_w1minus) * (1.0 + tanh(k_wminus*(u - u_wminus)))) * 0.5);
-        rDY_[2] = (1.0 - h_w) * (w_inf - w) / tau_wminus - (h_w * w / tau_wplus);
-        //
+    rDY_[0] = -(J_fi + J_so + J_si) + stim_current;
 
-        //ds_dt = dsdt(ustep, sstep);
-        //
-        tau_s = (1.0 - h_w) * tau_s1 + (h_w * tau_s2);
-        rDY_[3] = (((1.0 + tanh(k_s*(u - u_s))) * 0.5) - s) / tau_s;
-        //
+    real v_inf = (u < theta_vminus) ? 1.0 : 0.0;
+    real tau_v_rl = (tau_vplus * tau_vminus) / (tau_vplus - tau_vplus * H + tau_vminus * H);
+    real v_inf_rl = (tau_vplus * v_inf * (1 - H)) / (tau_vplus - tau_vplus * H + tau_vminus * H);
 
+    if (tau_v_rl > 1e-10) {
+        rDY_[1] = v_inf_rl - (v_inf_rl - v) * exp(-dt / tau_v_rl);
+    } else {
+        rDY_[1] = dt * ((1.0 - H) * (v_inf - v) / tau_vminus - H * v / tau_vplus) + v;
+    }
+
+    real w_inf = (1.0 - h_o) * (1.0 - (u / tau_winf)) + h_o * w_infstar;
+    real tau_wminus = tau_w1minus + (tau_w2minus - tau_w1minus) * (1.0 + tanh(k_wminus * (u - u_wminus))) * 0.5;
+    real tau_w_rl = (tau_wplus * tau_wminus) / (tau_wplus - tau_wplus * h_w + tau_wminus * h_w);
+    real w_inf_rl = (tau_wplus * w_inf * (1 - h_w)) / (tau_wplus - tau_wplus * h_w + tau_wminus * h_w);
+
+    if (tau_w_rl > 1e-10) {
+        rDY_[2] = w_inf_rl - (w_inf_rl - w) * exp(-dt / tau_w_rl);
+    } else {
+        rDY_[2] = dt * ((1.0 - h_w) * (w_inf - w) / tau_wminus - h_w * w / tau_wplus) + w;
+    }
+
+    real tau_s = (1.0 - h_w) * tau_s1 + h_w * tau_s2;
+    real s_inf_rl = (1.0 + tanh(k_s * (u - u_s))) / 2;
+
+    if (tau_s > 1e-10) {
+        rDY_[3] = s_inf_rl - (s_inf_rl - s) * exp(-dt / tau_s);
+    } else {
+        rDY_[3] = dt * (((1.0 + tanh(k_s * (u - u_s))) * 0.5 - s) / tau_s) + s;
+    }
 
 }
